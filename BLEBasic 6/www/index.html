@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="lib/onsen/js/onsenui.js"></script>
+<!-- Uncommenting the lines below can enable / disable the Android Style -->
+    <!--
+        <script>
+            ons.platform.select("android");
+        </script>
+    <!-- -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <title>Task Reminder</title>
+</head>
+<body>
+
+
+<ons-navigator id="pageNavigator" page="devices.html"></ons-navigator>
+
+<ons-modal id="refreshDevicesModal" animation="fade">
+    <ons-progress-circular indeterminate></ons-progress-circular>
+</ons-modal>
+
+<!-- List of devices page -->
+<ons-template id="devices.html">
+    <ons-page id="devicesPage">
+        <ons-toolbar>
+            <div class="center">Devices</div>
+            <div class="right">
+                <ons-toolbar-button >
+                    <ons-icon icon="ion-refresh" id="refreshButton"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+<!--
+            <div class="right"
+            <ons-button id="refreshButton">
+               <ons-if platform="android">
+                    <ons-icon icon="md-refresh" id="refreshButtonAnd"></ons-icon>&nbsp;
+                </ons-if>
+
+                <ons-if platform="ios other">
+                    <ons-icon icon="ion-refresh" id="refreshButtonIOS"></ons-icon>&nbsp;
+                </ons-if>
+            </ons-button>
+            </div> -->
+        </ons-toolbar>
+
+
+<!--        <ons-pull-hook id="pull-hook">
+            Scanning...
+        </ons-pull-hook>
+-->
+
+        <ons-list id="deviceList">
+
+        </ons-list>
+    </ons-page>
+</ons-template>
+
+
+<!-- Specific device page -->
+<ons-template id="page1.html">
+    <ons-page id="page1">
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Disconnect</ons-back-button></div>
+            <div class="center">Task Reminder</div>
+            <div class="right">
+                    <ons-toolbar-button id="newButton" onclick="newButtonClick()">New</ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-modal id="connectingModal" animation="fade">
+            Connecting...<br />
+            <ons-progress-circular indeterminate></ons-progress-circular>
+        </ons-modal>
+
+        <ons-list-item style="text-align: center;">
+            <div class="center">
+                <ons-input id="displayCurrentTime2"></ons-input>
+            </div>
+        </ons-list-item>
+
+        <!-- <div class="centered" id="solutionValue" style="text-align:center;"></div> -->
+        <ons-list id="addedTasks">
+            <ons-list-header>
+                Tasks (Priority 0: highest, 5: lowest)
+            </ons-list-header>
+        </ons-list>
+
+    </ons-page>
+</ons-template>
+
+<ons-template id="page2.html">
+    <ons-page id="page2">
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center">New Task</div>
+            <div class="right">
+                <ons-toolbar-button id="saveButton" onclick="saveTask();showDialog('dialog-1');">Save</ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-list>
+        <ons-list-header>Add task's title (1-19 letters) and priority (0: highest, 5: lowest).</ons-list-header>
+        <ons-list-item>
+            <div class="left">Title</div>
+            <div class="right">
+                <ons-input id="titleInput" modifier="underbar" type="text" maxlength="19" float></ons-input>
+            </div>
+        </ons-list-item>
+        <ons-list-item>
+            <div class="left">Priority</div>
+            <div class="right">
+                <ons-select id="selectPriority">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </ons-select>
+            </div>
+        </ons-list-item>
+        <ons-list-item>
+            <div class="left">Due date/time</div>
+            <div class="right">
+                <ons-input id="displayCurrentTime"></ons-input>
+            </div>
+        </ons-list-item>
+        </ons-list>
+    </ons-page>
+
+</ons-template>
+
+<ons-dialog id="dialog-1">
+        <div style="text-align: center; padding: 10px;">
+             <p>
+               Click on the left arrow ('<-') to return to main page.
+             <p>
+
+             <p>
+              <ons-button onclick="hideDialog('dialog-1')">Got it!</ons-button>
+             </p>
+        </div>
+    </ons-dialog>
+
+<ons-dialog id="dialog-2">
+        <div style="text-align: center; padding: 10px;">
+             <p>
+               The main task has been updated.
+               <br>
+               Check your display!
+             <p>
+
+             <p>
+              <ons-button onclick="hideDialog('dialog-2')">Got it!</ons-button>
+             </p>
+        </div>
+</ons-dialog>
+
+
+</body>
+</html>
