@@ -27,3 +27,4 @@ The following prerequisites are required to build this project.
 * [Phonegap](https://phonegap.com/) - An open source distribution of Cordova 
 * [Onsen UI Ver. 2](https://onsen.io/) - UI framework used to create the HTML5 hybrid mobile application
 
+Final_Project_222_Documentation.xlsx is a detailed project documentation.
